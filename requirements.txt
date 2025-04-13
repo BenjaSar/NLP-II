@@ -1,0 +1,8 @@
+transformers
+pillow
+torch
+groq
+streamlit
+langchain
+langchain_core
+langchain_groq
