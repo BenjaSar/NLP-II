@@ -2,7 +2,9 @@
 
 
 import os
+import sys
 import io
+import logging
 from pinecone import Pinecone
 from openai import OpenAI
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -30,6 +32,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 # Configuration 
 openai_api_key = os.getenv('OPENAI_API_KEY')
