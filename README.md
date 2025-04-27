@@ -56,8 +56,34 @@ Or you can pass api_key directly in code if you're testing.
 
 #### Demo 📸 
 
-Run the video showed in this repository.
+Run the video showed ***Streamlit — chatbot.mp4*** in this repository.
 
+### Assigment 3 
+
+🤖 Deepseek R1 - Reasoner
+
+🤖 A multi-functional AI agent powered by DeepSeek-V2-R1 and integrated with LangChain, designed to:
+✅ Analyze complex tasks
+✅ Generate step-by-step execution plans
+✅ Perform dynamic calculations
+✅ Make recommendations about the answers get.
+
+Features
+
+🔹 Advanced Reasoning – Uses DeepSeek-V2-R1 for structured, logical problem-solving.
+🔹 Plan Generation – Breaks tasks into clear, actionable steps.
+🔹 Self-Correction – Reviews and improves its own answers.
+🔹 LangChain Integration – Supports chained workflows and memories.
+
+2. Add your environment variables
+Create a .env file or export the following:
+```
+DEEPSEEK_API_KEY="your_api_key_here"
+```
+
+#### Demo 📸 
+
+Run the video showed ***AI_agent_Deepseek_reasoner.mp4*** in this repository.
 
 #### License 
 MIT License ©
