@@ -58,9 +58,29 @@ Or you can pass api_key directly in code if you're testing.
 
 Run the video showed ***Streamlit — chatbot.mp4*** in this repository.
 
+### Assignment 2
+
+#### 🤖 CV evaluator with GPT-4o and Langchanin
+
+AI_Agentv2.ipynb demonstrates how to build multiple autonomous AI agents, each using Retrieval-Augmented Generation (RAG), LangChain, Pinecone, and LangGraph.
+
+📋 Features
+
+    AgentState structured management (task, context, content)
+
+    LangGraph to define multi-step reasoning workflows (plan → retrieve → generate)
+
+    RetrievalQA pipeline for grounding LLM responses with vector search
+
+    Modular nodes: easy to plug in smarter planning, retrieval, or generation modules
+
+#### Demo 📸 
+
+Run the video ***AI_Agentv2.mp4*** showed in this repository.
+
 ### Assigment 3 
 
-🤖 Deepseek R1 - Reasoner
+#### 🤖 Deepseek R1 - Reasoner
 
 🤖 A multi-functional AI agent powered by DeepSeek-V2-R1 and integrated with LangChain, designed to:
 ✅ Analyze complex tasks
@@ -83,7 +103,7 @@ DEEPSEEK_API_KEY="your_api_key_here"
 
 #### Demo 📸 
 
-Run the video showed ***AI_agent_Deepseek_reasoner.mp4*** in this repository.
+Run the video ***AI_agent_Deepseek_reasoner.mp4*** showed  in this repository.
 
 #### License 
 MIT License ©
