@@ -1,8 +1,71 @@
+# Core ML/DL frameworks
+# 
+# CUDA INSTALLATION INSTRUCTIONS:
+# For NVIDIA GPU with CUDA 11.8 (recommended):
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#
+# For CUDA 12.1:
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#
+# For CPU only:
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+#
+# Check your CUDA version: nvidia-smi
+
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
 transformers
+
+# Data science and visualization
+numpy>=1.24.0
+matplotlib>=3.7.0
 pillow
-torch
+
+# HTTP and networking
+httpx>=0.24.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# LLM and AI frameworks
 groq
-streamlit
+openai
 langchain
-langchain_core
-langchain_groq
+langchain-core
+langchain-openai
+langchain-groq
+langchain-pinecone
+langchain-community
+
+# Vector databases
+pinecone-client[grpc]
+
+# Document processing
+pypdf2
+
+# Web applications
+streamlit
+
+# Environment management
+python-dotenv
+
+# HTTP client for downloading datasets
+httpx>=0.24.0
+
+# Progress bars for training loops
+tqdm>=4.65.0
+
+# Numerical computing
+numpy>=1.24.0
+
+# Plotting and visualization
+matplotlib>=3.7.0
+
+# CUDA/cuDNN Requirements:
+# - NVIDIA GPU with CUDA support
+# - CUDA Toolkit 11.8 or 12.1 (installed separately)
+# - cuDNN 8.x (usually bundled with PyTorch)
+# 
+# To verify CUDA installation after installing PyTorch:
+#   python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}'); print(f'CUDA version: {torch.version.cuda}')"
