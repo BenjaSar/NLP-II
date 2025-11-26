@@ -8,25 +8,26 @@ import logging
 from pinecone import Pinecone
 from openai import OpenAI
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-#from langchain_classic.docstore.document import Document
+#from langchain.docstore.document import Document
 from langchain_core.documents import Document
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import Pinecone as PineconeVectorStore
-from langchain_classic.chains import RetrievalQA, LLMChain, StuffDocumentsChain
-from langchain_classic.chains import create_retrieval_chain
-from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+from langchain.chains import RetrievalQA, LLMChain, StuffDocumentsChain
+from langchain_openai import ChatOpenAI
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 import textwrap
-#from pinecone.grpc import PineconeGRPC as Pinecone
+from pinecone.grpc import PineconeGRPC as Pinecone
 import streamlit as st
 from langchain_community.llms import OpenAI
 from PyPDF2 import PdfReader
 
-from langchain_classic.chains import ConversationChain
-from langchain_classic.memory import ConversationBufferMemory
-from langchain_classic.llms import OpenAI
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+from langchain.llms import OpenAI
 
-from langchain_classic.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv
 
 
@@ -105,7 +106,7 @@ pinecone_vectorstore.add_documents(documents=documents, ids=indices)
 
 # Model
 # Initilize the model
-llm = ChatOpenAI(model='gpt-4o-mini', temperature=1)
+llm = ChatOpenAI(model='gpt-3.5-turbo', temperature=1)
 
 # Defining the prompt of the system
 system_prompt = (
@@ -117,16 +118,25 @@ system_prompt = (
     "Contexto: {context}"
 )
 
-# Create the prompt with messages of the system and the user
+# Create the prompt with messages of the system and the usar
 prompt_template = ChatPromptTemplate.from_messages([
     ("system", system_prompt),
-    ("human", "{input}")
+    ("human", "{question}")
 ])
 
-# Create a document processing chain that combines retrieved documents with the LLM
-document_chain = create_stuff_documents_chain(
+# Encapsulate the LLM with the prompt in a string
+llm_chain = LLMChain(
     llm=llm,
-    prompt=prompt_template
+    prompt=prompt_template,
+    verbose=True
+)
+
+# Create a StuffDocumentsChain to combine documents into a single prompt for the LLM
+stuff_chain = StuffDocumentsChain(
+    llm_chain=llm_chain,               # The chain that handles prompt + LLM logic
+    document_variable_name="context",  # The placeholder used in your prompt template
+    # Optional: logs internal steps (good for debugging)
+    verbose=True
 )
 
 # Configure the retriever from Pinecone
@@ -135,10 +145,17 @@ retriever = pinecone_vectorstore.as_retriever(
     search_kwargs={'k': 3}
 )
 
+
 # Full question-answering chain with document retrieval and context injection
-qa_chain = create_retrieval_chain(
+qa_chain = RetrievalQA(
+    # Vector retriever (e.g. Pinecone, FAISS, etc.)
     retriever=retriever,
-    combine_docs_chain=document_chain
+    # Chain that formats and feeds context to the LLM
+    combine_documents_chain=stuff_chain,
+    # Set to True if you want to display source docs
+    return_source_documents=True,
+    # Optional: logs intermediate steps for debugging
+    verbose=True
 )
 
 
@@ -176,9 +193,9 @@ if user_input:
         {"role": "user", "content": user_input})
     
     user_input = user_input.strip()
-    # Getting the answer of the bot (Using LangChain create_retrieval_chain)
-    response = qa_chain.invoke({"input": user_input})
-    answer = response["answer"]
+    # Getting the answer of the bot (Using LangChain RetrievalQA)
+    response = qa_chain({"query": user_input})
+    answer = response["result"]
 
     # Show the answer of the bot
     st.chat_message("assistant").markdown(answer)
