@@ -38,9 +38,10 @@ logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 # Configuration
 openai_api_key = os.getenv('OPENAI_API_KEY')
+print(openai_api_key)
 pinecone_api_key = os.getenv('PINECONE_API_KEY')  # Renamed for consistency
-PDF_FILE_PATH = os.getenv('PDF_FILE_PATH', 'cvFS.pdf')
-PINECONE_INDEX_NAME = os.getenv('PINECONE_INDEX_NAME', 'quickstart')
+PDF_FILE_PATH = os.getenv('PDF_FILE_PATH', 'ai_engineer_cv.pdf')
+PINECONE_INDEX_NAME = os.getenv('PINECONE_INDEX_NAME', 'ragbot')
 CHUNK_SIZE = int(os.getenv('CHUNK_SIZE', '500'))  # Increase default
 CHUNK_OVERLAP = int(os.getenv('CHUNK_OVERLAP', '50'))  # Add overlap
 
@@ -90,7 +91,7 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=200, chunk_overlap=0)
 
 # Create metadata with the file name for each fragment
-metadata = [{"filename": 'cvFS.pdf'} for _ in range(len(text))]
+metadata = [{"filename": 'ai_engineer_cv.pdf'} for _ in range(len(text))]
 
 # Divide the text in fragments and assigne metadata to each frament
 documents = text_splitter.create_documents([text], metadatas=metadata)
@@ -98,7 +99,11 @@ documents = text_splitter.create_documents([text], metadatas=metadata)
 indices = [f"{'CV'}_{i+1}" for i in range(len(documents))]
 
 # Upload the embedding vectors to pinecone
-pinecone_vectorstore.add_documents(documents=documents, ids=indices)
+try:
+    pinecone_vectorstore.add_documents(documents=documents, ids=indices)
+except Exception as e:
+    logging.info(f"Documents already exist or error occurred: {e}")
+
 
 # Model
 # Initilize the model
@@ -146,6 +151,11 @@ initialize_session_state()
 
 st.title("🤖 Chatbot with GPT-4o.")
 st.subheader("¡Ask a question!")
+with st.sidebar:
+    openai_api_key = st.text_input("OpenAI API Key", key="feedback_api_key", type="password")
+    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
+    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/pages/5_Chat_with_user_feedback.py)"
+    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
 
 # Show the last message
 for msg in st.session_state.conversation_history:
