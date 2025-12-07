@@ -1,115 +1,215 @@
-
 ![header](doc/imgs/LogoHeader.png)
 
-###### Author: FS
+# NLP II - AI Agents & Language Models
 
-## LARGE LANGUAGE MODEL
--------------------------
+**Author:** FS  
+**Repository:** [NLP-II](https://github.com/BenjaSar/NLP-II)
 
-### Assignment 1
+---
 
-#### GPT-3.5 Document QA Chatbot 🧠 
+## 📋 Table of Contents
 
-This project is an intelligent chatbot built with OpenAI's GPT-3.5-turbo, LangChain, and Streamlit. It allows users to ask questions and get answers based on the content of vectorized documents using semantic search.
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Technology Stack](#technology-stack)
+- [Assignments](#assignments)
+  - [Assignment 1: GPT-3.5 Document QA Chatbot](#assignment-1-gpt-35-document-qa-chatbot)
+  - [Assignment 2: CV Evaluator with GPT-4o & LangChain](#assignment-2-cv-evaluator-with-gpt-4o--langchain)
+  - [Assignment 3: DeepSeek R1 Reasoning Agent](#assignment-3-deepseek-r1-reasoning-agent)
+  - [Bonus: TinyGPT Implementation](#bonus-tinygpt-implementation)
+- [Installation & Setup](#installation--setup)
+- [Usage](#usage)
+- [License](#license)
 
-##### Features 
+---
 
-✅ Chat interface with Streamlit
+## 🎯 Overview
 
-🔍 Document-based question answering
+This repository contains a comprehensive collection of AI projects demonstrating advanced Natural Language Processing (NLP) techniques and autonomous AI agent development. The projects showcase integration with state-of-the-art language models, vector databases, and orchestration frameworks for building intelligent systems.
 
-🤖 GPT-3.5-turbo integration
+---
 
-🧠 Contextual retrieval using vector stores (e.g. Pinecone or FAISS)
-
-📚 Source document referencing (optional)
-
-💾 Persistent conversation history (in session)
-
-#### Installation  📦 
-
-1. Clone the repo
-
-`git clone https://github.com/yourusername/gpt-doc-chatbot.git
-cd gpt-doc-chatbot`
-
-2. Install dependencies
-
-We recommend using a virtual environment:
-
-`pip install -r requirements.txt`
-
-3. Add your environment variables
-Create a .env file or export the following:
+## 📁 Project Structure
 
 ```
-OPENAI_API_KEY=your_openai_key_here
-PINECONE_API_KEY=your_pinecone_key
-PINECONE_ENV=your_pinecone_environment
+Ejercicios/
+├── tp2/                              # Assignment 2 & Bonus Projects
+│   ├── chat_app.py                  # Streamlit chat application
+│   ├── prompt.md                    # Prompt templates
+│   ├── ai_engineer_cv.pdf           # Sample CV for evaluation
+│   ├── utils/
+│   │   └── streamlit.py             # Streamlit utilities
+│   └── videos/                      # Demo videos
+├── tinyGPT/                          # Bonus: Small GPT Implementation
+│   ├── TinyGPT.ipynb                # Training notebook
+│   ├── trainer.py                   # Training script
+│   └── checkpoints/
+│       └── checkpoint_final.pt      # Pre-trained model weights
+├── text/                             # Testing & Utilities
+│   ├── test_document_processor.py   # Document processing tests
+│   └── test_qa_chain.py             # QA chain tests
+├── doc/                              # Documentation & Assets
+│   └── imgs/                        # Logo and header images
+├── requirements.txt                  # Python dependencies
+├── .env.example                      # Environment variables template
+├── README.md                         # This file
+└── AI_Agent*.ipynb                  # Jupyter notebooks for agents
 ```
 
-Or you can pass api_key directly in code if you're testing.
+---
 
-#### Running  the app ▶️ 
+## 🛠️ Technology Stack
 
-`streamlit run app.py`
+- **Language Models:** OpenAI GPT-3.5, GPT-4o, DeepSeek-V2-R1
+- **Frameworks:** LangChain, LangGraph, Streamlit
+- **Vector Databases:** Pinecone, FAISS
+- **Development:** Python, Jupyter Notebooks
+- **Dependencies:** See `requirements.txt`
 
-#### Demo 📸 
+---
 
-Run the video showed ***Streamlit — chatbot.mp4*** in this repository.
+## 📚 Assignments
 
-### Assignment 2
+### Assignment 1: GPT-3.5 Document QA Chatbot
 
-#### 🤖 CV evaluator with GPT-4o and Langchanin
+**Overview:** An intelligent chatbot leveraging OpenAI's GPT-3.5-turbo and semantic search to answer questions based on document content.
 
-AI_Agentv2.ipynb demonstrates how to build multiple autonomous AI agents, each using Retrieval-Augmented Generation (RAG), LangChain, Pinecone, and LangGraph.
+**Features:**
+- ✅ Interactive Streamlit chat interface
+- 🔍 Document-based question answering with semantic search
+- 🤖 GPT-3.5-turbo LLM integration
+- 🧠 Contextual retrieval using vector stores (Pinecone/FAISS)
+- 📚 Source document referencing
+- 💾 Persistent conversation history within session
 
-📋 Features
+**Demo:** See `Streamlit — chatbot.mp4` in the repository
 
-    AgentState structured management (task, context, content)
+---
 
-    LangGraph to define multi-step reasoning workflows (plan → retrieve → generate)
+### Assignment 2: CV Evaluator with GPT-4o & LangChain
 
-    RetrievalQA pipeline for grounding LLM responses with vector search
+**Overview:** A sophisticated multi-agent system for evaluating CVs and providing AI-powered recommendations using Retrieval-Augmented Generation (RAG).
 
-    Modular nodes: easy to plug in smarter planning, retrieval, or generation modules
+**Features:**
+- 🤖 Multiple autonomous AI agents with specialized roles
+- 🔄 Retrieval-Augmented Generation (RAG) pipelines
+- 📊 AgentState structured management for task coordination
+- 🔗 LangGraph workflow orchestration with multi-step reasoning
+- 🎯 Modular architecture: easy integration of custom planning, retrieval, and generation modules
 
-#### Demo 📸 
-
-Run the video ***AI_Agentv2.mp4*** showed in this repository.
-
-### Assigment 3 
-
-#### 🤖 Deepseek R1 - Reasoner
-
-🤖 A multi-functional AI agent powered by DeepSeek-V2-R1 and integrated with LangChain, designed to:
-✅ Analyze complex tasks
-✅ Generate step-by-step execution plans
-✅ Perform dynamic calculations
-✅ Make recommendations about the answers get.
-
-Features
-
-🔹 Advanced Reasoning – Uses DeepSeek-V2-R1 for structured, logical problem-solving.
-🔹 Plan Generation – Breaks tasks into clear, actionable steps.
-🔹 Self-Correction – Reviews and improves its own answers.
-🔹 LangChain Integration – Supports chained workflows and memories.
-
-2. Add your environment variables
-Create a .env file or export the following:
+**Architecture:**
 ```
-DEEPSEEK_API_KEY="your_api_key_here"
+Plan → Retrieve → Generate → Evaluate
 ```
 
-#### Demo 📸 
+**Demo:** See `AI_Agentv2.mp4` in the repository
 
-Run the video ***AI_agent_Deepseek_reasoner.mp4*** showed  in this repository.
+---
 
-#### License 
-MIT License ©
+### Assignment 3: DeepSeek R1 Reasoning Agent
 
-![header](doc/imgs/LogoFooter.png)
+**Overview:** An advanced AI agent powered by DeepSeek-V2-R1, designed for complex reasoning, planning, and recommendation generation.
 
+**Capabilities:**
+- 🔹 **Advanced Reasoning:** Step-by-step logical problem-solving
+- 🔹 **Plan Generation:** Breaks complex tasks into actionable steps
+- 🔹 **Self-Correction:** Reviews and improves answers iteratively
+- 🔹 **Dynamic Calculations:** Performs numerical computations within reasoning
+- 🔹 **LangChain Integration:** Supports chained workflows and memory management
 
+**Features:**
+- Structured multi-step reasoning
+- Real-time calculation and verification
+- Recommendation generation with confidence scores
 
+**Demo:** See `AI_agent_Deepseek_reasoner.mp4` in the repository
 
+---
+
+### Bonus: TinyGPT Implementation
+
+**Overview:** A lightweight GPT implementation demonstrating transformer architecture and training techniques.
+
+**Contents:**
+- `TinyGPT.ipynb` - Complete training pipeline notebook
+- `trainer.py` - Standalone training script
+- `checkpoint_final.pt` - Pre-trained model checkpoint
+
+---
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- Python 3.8+
+- pip or conda package manager
+- Virtual environment (recommended)
+
+### Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/BenjaSar/NLP-II.git
+   cd Ejercicios
+   ```
+
+2. **Create and activate virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Edit `.env` and add your API keys:
+   ```env
+   OPENAI_API_KEY=your_openai_key_here
+   DEEPSEEK_API_KEY=your_deepseek_key_here
+   PINECONE_API_KEY=your_pinecone_key_here
+   PINECONE_ENV=your_pinecone_environment
+   ```
+
+---
+
+## 🚀 Usage
+
+### Running the Streamlit Chat Application
+```bash
+cd tp2
+streamlit run chat_app.py
+```
+
+### Running Jupyter Notebooks
+```bash
+# Assignment 2: AI Agent with CV Evaluation
+jupyter notebook AI_Agentv2.ipynb
+
+# Assignment 3: DeepSeek Reasoning Agent
+jupyter notebook AI_agent_Deepseek_reasoner.ipynb
+
+# TinyGPT Training
+jupyter notebook tinyGPT/TinyGPT.ipynb
+```
+
+### Running Tests
+```bash
+python text/test_document_processor.py
+python text/test_qa_chain.py
+```
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License. See LICENSE file for details.
+
+---
+
+![footer](doc/imgs/LogoFooter.png)
