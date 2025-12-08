@@ -1,3 +1,6 @@
 .env
 /varios
 /nlp2
+/.venv
+.DS_Store
+*.pyc
