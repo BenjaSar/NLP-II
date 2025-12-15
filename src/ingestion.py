@@ -6,7 +6,7 @@ import os
 # Define the absolute path to the data folder
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
-DATA_DIR = os.path.join(PROJECT_ROOT, "tp2")
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
 def _resolve_path(file_path):
     # If an absolute path is provided, use it
